@@ -52,3 +52,8 @@ GRANT USAGE, SELECT ON SEQUENCE tb_funcionarios_fun_codigo_seq TO role_gerente;
 
 GRANT USAGE, SELECT ON SEQUENCE tb_fornecedores_for_codigo_seq TO role_admin;
 GRANT USAGE, SELECT ON SEQUENCE tb_fornecedores_for_codigo_seq TO role_gerente;
+
+
+GRANT USAGE, SELECT ON SEQUENCE tb_produtos_pro_codigo_seq TO role_gerente;
+GRANT USAGE, SELECT ON SEQUENCE tb_produtos_pro_codigo_seq TO role_admin;
+GRANT USAGE, SELECT ON SEQUENCE tb_produtos_pro_codigo_seq TO role_funcionario;
