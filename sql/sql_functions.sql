@@ -20,11 +20,13 @@ EXECUTE FUNCTION validar_cpf();
 
 --PROCEDURE PERMITE ADICIONAR USUÁRIO E GARANTIR OS PRIVILÉGIOS
 
-CREATE OR REPLACE PROCEDURE public.adduserandgrantrole(
+CREATE OR REPLACE PROCEDURE adduserAndGrantRole(
     username text,
     usercpf text,
     userpassword text,
     userfunc text)
+
+AS $$
 DECLARE 
     grantRole text; 
 BEGIN
@@ -32,8 +34,8 @@ BEGIN
     grantRole := 'role_' || userfunc;
 
     -- Inserindo os dados do usuário na tabela tb_funcionarios
-    INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao)
-    VALUES (DEFAULT, username, usercpf, userpassword, userfunc);
+    INSERT INTO tb_funcionarios (fun_nome, fun_cpf, fun_senha, fun_funcao)
+    VALUES (username, usercpf, userpassword, userfunc);
 
     -- Cria um usuário no PostgreSQL com o nome e senha fornecidos
     EXECUTE format('CREATE USER %I WITH PASSWORD %L', username, userpassword);
@@ -51,7 +53,8 @@ EXCEPTION
         -- Em caso de erro, desfaz a transação
         RAISE EXCEPTION 'Erro durante a execução da transação: %', SQLERRM;
 
-END
+END;
+$$
 LANGUAGE 'plpgsql';
 
 --FUNÇÃO QUE EDITA O USUÁRIO
@@ -62,6 +65,7 @@ CREATE OR REPLACE PROCEDURE editarusuario(
     usersenha text,
     userfunc text,
     revoke_func text)
+    AS $$
 DECLARE
     role_func TEXT;
     role_revoke TEXT;
@@ -102,6 +106,7 @@ EXCEPTION
         RAISE EXCEPTION 'Erro durante a execução da transação: %', SQLERRM;
 
 END
+    $$
 LANGUAGE 'plpgsql';
 
 
