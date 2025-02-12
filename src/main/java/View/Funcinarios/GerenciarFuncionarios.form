@@ -22,12 +22,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fornecedor"/>
+            <Property name="text" type="java.lang.String" value="Produtos"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gerenciar Produtos"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu5MouseClicked"/>
@@ -37,12 +37,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuFunc">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios"/>
+            <Property name="text" type="java.lang.String" value="Gerenciamento"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuGerenciarFunc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gerenciar "/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Funcionarios "/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuGerenciarFuncActionPerformed"/>
@@ -50,12 +50,20 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuCadastrarFunc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar "/>
+                <Property name="text" type="java.lang.String" value="Cadastrar  Funcionarios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuCadastrarFuncActionPerformed"/>
               </Events>
             </MenuItem>
+            <Menu class="javax.swing.JMenu" name="backupBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Back Up"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backupBtnMouseClicked"/>
+              </Events>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>

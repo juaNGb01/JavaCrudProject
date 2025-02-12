@@ -5,6 +5,10 @@
 package View.Funcinarios;
 
 import Model.Dao.FuncionariosDao;
+import View.HomePageScreen;
+import View.PainelBackUp.BackUpScreen;
+import View.VendaScreen;
+import View.produto.GerenciarProdutos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,6 +63,15 @@ public class BuscarFuncionario extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         FunId = new javax.swing.JLabel();
         DeleteBtn = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        homeBtn = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        MenuFunc = new javax.swing.JMenu();
+        MenuGerenciarFunc = new javax.swing.JMenuItem();
+        MenuCadastrarFunc = new javax.swing.JMenuItem();
+        backupBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -261,6 +274,64 @@ public class BuscarFuncionario extends javax.swing.JFrame {
                 .addGap(313, 313, 313))
         );
 
+        homeBtn.setText("Home");
+        homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeBtnMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(homeBtn);
+
+        jMenu2.setText("Vendas ");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Produtos");
+
+        jMenu5.setText("Gerenciar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jMenu5);
+
+        jMenuBar1.add(jMenu3);
+
+        MenuFunc.setText("Gerenciamento");
+
+        MenuGerenciarFunc.setText("Gerenciar Funcionarios ");
+        MenuGerenciarFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuGerenciarFuncActionPerformed(evt);
+            }
+        });
+        MenuFunc.add(MenuGerenciarFunc);
+
+        MenuCadastrarFunc.setText("Cadastrar  Funcionarios");
+        MenuCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastrarFuncActionPerformed(evt);
+            }
+        });
+        MenuFunc.add(MenuCadastrarFunc);
+
+        backupBtn.setText("Back Up");
+        backupBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backupBtnMouseClicked(evt);
+            }
+        });
+        MenuFunc.add(backupBtn);
+
+        jMenuBar1.add(MenuFunc);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -394,6 +465,54 @@ public class BuscarFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
+    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
+        HomePageScreen homePage = new HomePageScreen();
+        homePage.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_homeBtnMouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+
+        VendaScreen telaVenda = new VendaScreen();
+        telaVenda.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        // TODO add your handling code here:
+
+        GerenciarProdutos prodScreen = new GerenciarProdutos();
+        prodScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void MenuGerenciarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGerenciarFuncActionPerformed
+        // TODO add your handling code here:
+
+        GerenciarFuncionarios BuscarFunScreen = new GerenciarFuncionarios();
+        BuscarFunScreen.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_MenuGerenciarFuncActionPerformed
+
+    private void MenuCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarFuncActionPerformed
+        // TODO add your handling code here:
+        CadFuncionario CadFunScreen = new CadFuncionario();
+        CadFunScreen.setVisible(true);
+        //fecha tela atual
+        this.dispose();
+    }//GEN-LAST:event_MenuCadastrarFuncActionPerformed
+
+    private void backupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupBtnMouseClicked
+        // TODO add your handling code here:
+
+        BackUpScreen backup = new BackUpScreen();
+        backup.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backupBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -439,10 +558,15 @@ public class BuscarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTable FunTable;
     private javax.swing.JTextPane FuncUpdate;
     private javax.swing.JTextPane IdPesquisa;
+    private javax.swing.JMenuItem MenuCadastrarFunc;
+    private javax.swing.JMenu MenuFunc;
+    private javax.swing.JMenuItem MenuGerenciarFunc;
     private javax.swing.JTextPane NomeFunPesquisa;
     private javax.swing.JTextPane NomeUpdate;
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JPanel UpdatesPanel;
+    private javax.swing.JMenu backupBtn;
+    private javax.swing.JMenu homeBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
@@ -452,6 +576,10 @@ public class BuscarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;

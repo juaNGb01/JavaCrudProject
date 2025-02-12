@@ -167,6 +167,8 @@ public class CadProduto extends javax.swing.JFrame {
         descProdInput.setText(""); 
         priceProdInput.setText("");
         qtdProd.setValue(0); 
+        
+        
     }//GEN-LAST:event_salveProdBtnActionPerformed
 
     //Fechar aba

@@ -5,6 +5,7 @@
 package View.Funcinarios;
 
 import View.HomePageScreen;
+import View.PainelBackUp.BackUpScreen;
 import View.VendaScreen;
 import View.produto.GerenciarProdutos;
 import dao.FuncionarioDAO;
@@ -71,6 +72,7 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
         MenuFunc = new javax.swing.JMenu();
         MenuGerenciarFunc = new javax.swing.JMenuItem();
         MenuCadastrarFunc = new javax.swing.JMenuItem();
+        backupBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,9 +306,9 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Fornecedor");
+        jMenu3.setText("Produtos");
 
-        jMenu5.setText("Gerenciar Produtos");
+        jMenu5.setText("Gerenciar");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu5MouseClicked(evt);
@@ -316,9 +318,9 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        MenuFunc.setText("Funcionários");
+        MenuFunc.setText("Gerenciamento");
 
-        MenuGerenciarFunc.setText("Gerenciar ");
+        MenuGerenciarFunc.setText("Gerenciar Funcionarios ");
         MenuGerenciarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuGerenciarFuncActionPerformed(evt);
@@ -326,13 +328,21 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
         });
         MenuFunc.add(MenuGerenciarFunc);
 
-        MenuCadastrarFunc.setText("Cadastrar ");
+        MenuCadastrarFunc.setText("Cadastrar  Funcionarios");
         MenuCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuCadastrarFuncActionPerformed(evt);
             }
         });
         MenuFunc.add(MenuCadastrarFunc);
+
+        backupBtn.setText("Back Up");
+        backupBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backupBtnMouseClicked(evt);
+            }
+        });
+        MenuFunc.add(backupBtn);
 
         jMenuBar1.add(MenuFunc);
 
@@ -505,10 +515,11 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
 
     private void MenuGerenciarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGerenciarFuncActionPerformed
         // TODO add your handling code here:
-        
+
         GerenciarFuncionarios BuscarFunScreen = new GerenciarFuncionarios();
         BuscarFunScreen.setVisible(true);
         this.dispose();
+
     }//GEN-LAST:event_MenuGerenciarFuncActionPerformed
 
     private void MenuCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarFuncActionPerformed
@@ -518,6 +529,14 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
         //fecha tela atual
         this.dispose();
     }//GEN-LAST:event_MenuCadastrarFuncActionPerformed
+
+    private void backupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupBtnMouseClicked
+        // TODO add your handling code here:
+
+        BackUpScreen backup = new BackUpScreen();
+        backup.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backupBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -574,6 +593,7 @@ public class GerenciarFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JPanel UpdatesPanel;
     private javax.swing.JLabel atualFun;
+    private javax.swing.JMenu backupBtn;
     private javax.swing.JMenu homeBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

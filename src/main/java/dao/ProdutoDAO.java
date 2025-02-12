@@ -34,6 +34,7 @@ public class ProdutoDAO {
 
             conn.commit(); // Confirma a transação
             System.out.println("Produto adicionado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!", "cadastro concluido", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
             if (conn != null) {
@@ -85,8 +86,11 @@ public class ProdutoDAO {
                 table.addRow(row);
             }
             
+            
+            
         } catch (SQLException ex) {
             System.out.println("ERRO ao buscar produto: " + ex.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Nenhum produto encontrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -98,10 +102,6 @@ public class ProdutoDAO {
         table.setRowCount(0);
 
         try {
-            
-            //pega o id do fornecedor logado
-            //Usuario user = UserSession.getUserLogged();
-            //int userID = user.getId();
             
             //puxa apenas os produtos do fornecedor
             String sql = "select * from tb_produtos where pro_quantidade > 0";
@@ -247,6 +247,8 @@ public class ProdutoDAO {
                 conn.rollback();
                 System.out.println("Nenhum produto encontrado com o código especificado.");
             }
+            
+            JOptionPane.showMessageDialog(null, "Removido com sucesso!", "remoção concluido", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
             if (conn != null) {

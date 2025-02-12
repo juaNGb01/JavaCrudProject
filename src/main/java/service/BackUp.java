@@ -4,8 +4,16 @@
  */
 package service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import util.Conexao;
 import util.UserSession;
 
@@ -15,78 +23,94 @@ import util.UserSession;
  */
 public class BackUp {
     
-    private String user; 
-    private String password; 
-    private String path = "C:\\Users\\juanb\\OneDrive\\Área de Trabalho\\JavaCrudProject-main\\JavaCrudProject-main\\BackUp\\backup.sql";
-    private String host = "localhost"; 
-    private String port ="5432";
-    private String database = "trabalhoFinal"; 
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    
     
     public void executarBackUp(){
-        Connection conn = null; 
-        String User = UserSession.getUserLogged().getName();
-        String userSenha = UserSession.getUserLogged().getPassword();
-        setUser(User); 
-        setPassword(userSenha);
+        Connection conn = Conexao.getConn(); 
         
-        System.out.println("user: " + User + " Senha: " + userSenha ); 
+        new Thread(() -> {
+            
+            try{
+            
+            //pega a data que foi feito o backup
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+            String timestamp = now.format(formatter);
+            
+            String path = "C:\\Users\\juanb\\OneDrive\\Área de Trabalho\\JavaCrudProject-main\\JavaCrudProject-main\\BackUp\\backup.sql -" +timestamp;
+            Runtime r = Runtime.getRuntime();
+            
+            //PostgreSQL variables    
+            String host = "localhost";
+            String user = UserSession.getUserLogged().getName();
+            String dbase = "trabalhoFinal";
+            String password =  UserSession.getUserLogged().getPassword();
+            String pgdumpPath = "C:\\Program Files\\PostgreSQL\\17\\bin\\pg_dump.exe";
+            Process p;
+            ProcessBuilder pb;
 
-        try{
-            conn = Conexao.getConn(); 
-            
-            ProcessBuilder pb = new ProcessBuilder(
-            "pg_dump",           // Comando para fazer o dump do banco
-            "-h", host,         // Define o host do banco de dados
-            "-p", port,         // Define a porta do banco de dados
-            "-U", user,         // Define o usuário do banco de dados
-            "-F", "plain",        // Define o formato do backup (customizado, pode ser "plain" para SQL puro)
-            "-f", path,  // Define o arquivo de saída onde o backup será salvo
-            database           // Nome do banco de dados a ser exportado
-            );
-            
-            // Definir a senha no ambiente para evitar prompt
-            pb.environment().put("PGPASSWORD",password); 
-            pb.redirectErrorStream(true); // Redireciona erro para a saída padrão
-            
-            Process process = pb.start(); 
-            int exitCode = process.waitFor(); 
-            
-            if(exitCode == 0 ){
-                System.out.println("Backup realizado com sucesso em: " + path);
 
-            }else{
-                System.out.println("Erro ao realizar o backup.");
-
-            }
- 
+            r = Runtime.getRuntime();        
+            pb = new ProcessBuilder(pgdumpPath, "-v", "-h", host, "-f", path, "-U", user, dbase);
+            pb.environment().put("PGPASSWORD", password);
+            pb.redirectErrorStream(true);
+            p = pb.start();    
+            
+//            int exitCode = p.waitFor(); 
+//           
+//            if(exitCode == 0 ){
+//            System.out.println("Backup realizado com sucesso em: " + path);
+//
+//            }else{
+//                 System.out.println("Erro ao realizar o backup.");
+//            }
+//            
+//            InputStream is = p.getInputStream();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                System.out.println(line);
+//            }
+     
         
-        }catch(IOException | InterruptedException ex){
+            System.out.println("user: " + user + " Senha: " + password ); 
+
+        
+        }catch(IOException ex){
                 ex.printStackTrace();
 
         }
-    
-    
-    } 
-    
+        
+        }).start();  
         
 
+    } 
+    
+    public void backupAgendado(String periodo){
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        Runnable tarefaBackup = () -> {
+            System.out.println("Iniciando backup automático...");
+            executarBackUp();
+        };
+
+        if(periodo.equals("Diario")){
+            // Agenda a execução da tarefa a cada 30 dias
+            scheduler.scheduleAtFixedRate(tarefaBackup, 0, 1, TimeUnit.DAYS);
+        }
+        
+        if(periodo.equals("Semanal")){
+            // Agenda a execução da tarefa a cada 30 dias
+            scheduler.scheduleAtFixedRate(tarefaBackup, 0, 7, TimeUnit.DAYS);
+        }
+        
+        if(periodo.equals("Mensal")){
+            // Agenda a execução da tarefa a cada 30 dias
+            scheduler.scheduleAtFixedRate(tarefaBackup, 0, 30, TimeUnit.DAYS);
+        }
+
+    }
+
 }
+
+
 

@@ -26,8 +26,11 @@ public class UserDAO {
 
         try {
             conn = Conexao.getConn(user, password);
-
-            String sql = "SELECT * FROM tb_funcionarios WHERE fun_nome = ? AND fun_senha = ?";
+            
+            String sql = "SELECT f.* " +
+                "FROM tb_funcionarios f " +
+                "JOIN pg_user p ON f.fun_nome = p.usename " +
+                "WHERE f.fun_nome = ? AND f.fun_senha = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, user);
             stmt.setString(2, password);
@@ -36,7 +39,7 @@ public class UserDAO {
 
             if (rs.next()) {
 
-                //caso exista insância um usuário
+                //caso exista insância um usuáriopgdumpPath
                 Usuario loggedUser = new Usuario();
                 loggedUser.setName(rs.getString("fun_nome"));
                 loggedUser.setId(rs.getInt("fun_codigo"));

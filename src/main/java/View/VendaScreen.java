@@ -6,6 +6,7 @@ package View;
 
 import View.Funcinarios.GerenciarFuncionarios;
 import View.Funcinarios.CadFuncionario;
+import View.PainelBackUp.BackUpScreen;
 import View.produto.GerenciarProdutos;
 import dao.ProdutoDAO;
 import dao.VendaDAO;
@@ -66,6 +67,7 @@ public class VendaScreen extends javax.swing.JFrame {
         MenuFunc = new javax.swing.JMenu();
         MenuGerenciarFunc = new javax.swing.JMenuItem();
         MenuCadastrarFunc = new javax.swing.JMenuItem();
+        backupBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,9 +294,9 @@ public class VendaScreen extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Fornecedor");
+        jMenu3.setText("Produtos");
 
-        jMenu5.setText("Gerenciar Produtos");
+        jMenu5.setText("Gerenciar");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu5MouseClicked(evt);
@@ -304,9 +306,9 @@ public class VendaScreen extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        MenuFunc.setText("Funcionários");
+        MenuFunc.setText("Gerenciamento");
 
-        MenuGerenciarFunc.setText("Gerenciar ");
+        MenuGerenciarFunc.setText("Gerenciar Funcionarios ");
         MenuGerenciarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuGerenciarFuncActionPerformed(evt);
@@ -314,13 +316,21 @@ public class VendaScreen extends javax.swing.JFrame {
         });
         MenuFunc.add(MenuGerenciarFunc);
 
-        MenuCadastrarFunc.setText("Cadastrar ");
+        MenuCadastrarFunc.setText("Cadastrar  Funcionarios");
         MenuCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuCadastrarFuncActionPerformed(evt);
             }
         });
         MenuFunc.add(MenuCadastrarFunc);
+
+        backupBtn.setText("Back Up");
+        backupBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backupBtnMouseClicked(evt);
+            }
+        });
+        MenuFunc.add(backupBtn);
 
         jMenuBar1.add(MenuFunc);
 
@@ -378,6 +388,7 @@ public class VendaScreen extends javax.swing.JFrame {
     private void addCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCartBtnActionPerformed
         // TODO add your handling code here:
 
+        
         DefaultTableModel table = (DefaultTableModel) cartTable.getModel();
 
         long prodId = Long.parseLong(prodID.getText());
@@ -394,6 +405,13 @@ public class VendaScreen extends javax.swing.JFrame {
                     + "Tente novamente:", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        if(0 == qtd){
+            JOptionPane.showMessageDialog(null, "Quantidade igual a 0"
+                    + "Tente novamente:", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Produto prod = new Produto(prodId, desc, preco, qtd);
 
         VendaDAO venda = new VendaDAO();
@@ -409,47 +427,6 @@ public class VendaScreen extends javax.swing.JFrame {
         ProdutoDAO prodDao = new ProdutoDAO();
         prodDao.listarTodosProdutos(table);
     }//GEN-LAST:event_listProdActionPerformed
-
-    //Menu - retornar a home
-    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
-        HomePageScreen homePage = new HomePageScreen();
-        homePage.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_homeBtnMouseClicked
-    //Menu - retornar a tela de venda
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-
-        VendaScreen telaVenda = new VendaScreen();
-        telaVenda.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_jMenu2MouseClicked
-
-    //Menu - retornar a tela de gerenciamento de produto 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        // TODO add your handling code here:
-
-        GerenciarProdutos prodScreen = new GerenciarProdutos();
-        prodScreen.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenu5MouseClicked
-
-    //Menu - retornar a tela buscar funcionarios 
-    private void MenuGerenciarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGerenciarFuncActionPerformed
-        // TODO add your handling code here:
-        GerenciarFuncionarios BuscarFunScreen = new GerenciarFuncionarios();
-        BuscarFunScreen.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_MenuGerenciarFuncActionPerformed
-
-    //Menu - retornar a tela cadastro de funcionario
-    private void MenuCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarFuncActionPerformed
-        // TODO add your handling code here:
-        CadFuncionario CadFunScreen = new CadFuncionario();
-        CadFunScreen.setVisible(true);
-        //fecha tela atual
-        this.dispose();
-    }//GEN-LAST:event_MenuCadastrarFuncActionPerformed
 
     // Botão para pegar produtos da tabela
     private void prodTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prodTableMouseClicked
@@ -502,6 +479,54 @@ public class VendaScreen extends javax.swing.JFrame {
         model.setRowCount(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
+        HomePageScreen homePage = new HomePageScreen();
+        homePage.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_homeBtnMouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+
+        VendaScreen telaVenda = new VendaScreen();
+        telaVenda.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        // TODO add your handling code here:
+
+        GerenciarProdutos prodScreen = new GerenciarProdutos();
+        prodScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void MenuGerenciarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGerenciarFuncActionPerformed
+        // TODO add your handling code here:
+
+        GerenciarFuncionarios BuscarFunScreen = new GerenciarFuncionarios();
+        BuscarFunScreen.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_MenuGerenciarFuncActionPerformed
+
+    private void MenuCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarFuncActionPerformed
+        // TODO add your handling code here:
+        CadFuncionario CadFunScreen = new CadFuncionario();
+        CadFunScreen.setVisible(true);
+        //fecha tela atual
+        this.dispose();
+    }//GEN-LAST:event_MenuCadastrarFuncActionPerformed
+
+    private void backupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupBtnMouseClicked
+        // TODO add your handling code here:
+
+        BackUpScreen backup = new BackUpScreen();
+        backup.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backupBtnMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -540,6 +565,7 @@ public class VendaScreen extends javax.swing.JFrame {
     private javax.swing.JMenu MenuFunc;
     private javax.swing.JMenuItem MenuGerenciarFunc;
     private javax.swing.JButton addCartBtn;
+    private javax.swing.JMenu backupBtn;
     private javax.swing.JButton cartBtn;
     private static javax.swing.JPanel cartPanel;
     private javax.swing.JTable cartTable;
