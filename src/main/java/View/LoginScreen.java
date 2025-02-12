@@ -4,8 +4,10 @@
  */
 package View;
 
-import Model.Dao.LoginDao;
+import dao.LoginDAO;
 import java.awt.CardLayout;
+import service.LoginService;
+import util.Conexao;
 
 /**
  *
@@ -114,10 +116,10 @@ public class LoginScreen extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
           
         String user = userInput.getText(); 
-        char[] senha = senhaInput.getPassword(); 
+        String senha =  new String(senhaInput.getPassword()); 
 
-        LoginDao login = new LoginDao();
-        Boolean status = login.ValidarLogin(user, senha);
+            LoginService loginService = new LoginService();
+            Boolean status = loginService.login(user, senha);
         
         if(status){
             HomePageScreen home = new HomePageScreen(); 

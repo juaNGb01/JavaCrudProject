@@ -4,8 +4,9 @@
 
 package com.mycompany.lojaApplication;
 
-import DBConnection.Conexao;
+import util.Conexao;
 import java.sql.Connection;
+import javax.swing.*;
 
 /**
  *
@@ -13,11 +14,13 @@ import java.sql.Connection;
  */
 public class ProjetoFinal {
 
-    public static void main(String[] args) {
-        
-       char[] senha = {'r', 'o', 'o', 't'}; 
-       
-       //Connection conn = Conexao.getConnection("postgres", senha); 
-        
+    public static void main(String[] args) { 
+        System.out.println("Hello World");    
+        try{
+         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e){
+            
+        }
     }
 }

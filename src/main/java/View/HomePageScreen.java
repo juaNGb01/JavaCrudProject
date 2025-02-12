@@ -4,10 +4,11 @@
  */
 package View;
 
-import Model.Dao.FuncionariosDao;
-import Model.Funcionario;
-import View.Funcinarios.BuscarFuncionario;
+import dao.FuncionarioDAO;
+import model.Funcionario;
+import View.Funcinarios.GerenciarFuncionarios;
 import View.Funcinarios.CadFuncionario;
+import View.produto.GerenciarProdutos;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -43,10 +44,10 @@ public class HomePageScreen extends javax.swing.JFrame {
         homeBtn = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        MenuFunc = new javax.swing.JMenu();
+        MenuGerenciarFunc = new javax.swing.JMenuItem();
+        MenuCadastrarFunc = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -84,34 +85,44 @@ public class HomePageScreen extends javax.swing.JFrame {
         jMenuBar1.add(homeBtn);
 
         jMenu2.setText("Vendas ");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Cadastro");
-
-        jMenuItem1.setText("Funcionario");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Produtos");
+
+        jMenu5.setText("Gerenciar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jMenu5);
 
         jMenuBar1.add(jMenu3);
 
-        jMenu5.setText("Buscar");
+        MenuFunc.setText("Funcionários");
 
-        jMenuItem2.setText("Funcionarios");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MenuGerenciarFunc.setText("Gerenciar ");
+        MenuGerenciarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MenuGerenciarFuncActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem2);
+        MenuFunc.add(MenuGerenciarFunc);
 
-        jMenuItem3.setText("Produtos");
-        jMenu5.add(jMenuItem3);
+        MenuCadastrarFunc.setText("Cadastrar ");
+        MenuCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastrarFuncActionPerformed(evt);
+            }
+        });
+        MenuFunc.add(MenuCadastrarFunc);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(MenuFunc);
 
         setJMenuBar(jMenuBar1);
 
@@ -132,34 +143,47 @@ public class HomePageScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //Botão abrir tela cadastro
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    
+    
+    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
+        HomePageScreen homePage = new HomePageScreen();
+        homePage.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_homeBtnMouseClicked
 
-        //abre tela de cadastro 
-        CadFuncionario CadFunScreen = new CadFuncionario(); 
-        CadFunScreen.setVisible(true); 
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        // TODO add your handling code here:
+
+        GerenciarProdutos prodScreen = new GerenciarProdutos();
+        prodScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void MenuGerenciarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGerenciarFuncActionPerformed
+        // TODO add your handling code here:
+        
+        GerenciarFuncionarios BuscarFunScreen = new GerenciarFuncionarios();
+        BuscarFunScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenuGerenciarFuncActionPerformed
+
+    private void MenuCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastrarFuncActionPerformed
+        // TODO add your handling code here:
+        CadFuncionario CadFunScreen = new CadFuncionario();
+        CadFunScreen.setVisible(true);
         //fecha tela atual
         this.dispose();
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MenuCadastrarFuncActionPerformed
 
-    //Botao Tela Listar Funcionarios
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    //Botão acessar tela de venda
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
         
-        BuscarFuncionario BuscarFunScreen = new BuscarFuncionario(); 
-        BuscarFunScreen.setVisible(true); 
-        this.dispose();
+        VendaScreen telaVenda = new VendaScreen(); 
+        telaVenda.setVisible(true); 
+        this.dispose(); 
         
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    
-    
-    //Botão voltar a home
-    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
-        CardLayout homeCard = (CardLayout) jPanel1.getLayout(); 
-        homeCard.show(jPanel1, "HomeCard"); 
-    }//GEN-LAST:event_homeBtnMouseClicked
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     
     
@@ -200,6 +224,9 @@ public class HomePageScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomePageScreen;
+    private javax.swing.JMenuItem MenuCadastrarFunc;
+    private javax.swing.JMenu MenuFunc;
+    private javax.swing.JMenuItem MenuGerenciarFunc;
     private javax.swing.JMenu homeBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -207,9 +234,6 @@ public class HomePageScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
