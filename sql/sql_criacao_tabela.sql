@@ -11,7 +11,7 @@ CREATE TABLE tb_fornecedores(
 	for_codigo BIGSERIAL PRIMARY KEY, 
 	for_descricao VARCHAR(45)
 
-)
+);
 
 CREATE TABLE tb_vendas(
 	ven_codigo BIGSERIAL PRIMARY KEY, 
