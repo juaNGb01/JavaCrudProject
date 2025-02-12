@@ -142,8 +142,8 @@ LANGUAGE plpgsql ;
 
 --REMOVER FUNCIONARIO
 CREATE OR REPLACE PROCEDURE removeruser(
-	IN userid integer,
-	IN username text)
+	 userid integer,
+	 username text)
 AS $$
 BEGIN
     EXECUTE format('DROP USER IF EXISTS %I', userName);
