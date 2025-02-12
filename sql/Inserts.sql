@@ -20,19 +20,8 @@ INSERT INTO tb_funcionarios (fun_nome, fun_cpf, fun_senha, fun_funcao) VALUES
 INSERT INTO tb_fornecedores (for_descricao) VALUES 
 ('Fornecedor de Laticínios'), 
 ('Distribuidora de Bebidas'),
-('Fornecedor de Carnes'),
-('Padaria e Confeitaria'),
-('Distribuidora de Hortifruti'),
-('Atacado de Higiene e Limpeza'),
-('Fornecedor de Grãos'),
-('Indústria de Doces'),
-('Fábrica de Enlatados'),
-('Importadora de Vinhos'),
-('Fábrica de Massas'),
-('Distribuidor de Frios'),
-('Fornecedor de Cereais'),
-('Distribuidor de Temperos'),
-('Fábrica de Congelados');
+('Fornecedor de Carnes');
+
 
 -- Inserindo produtos vinculados aos fornecedores
 INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedor_for_codigo) VALUES 
@@ -52,38 +41,4 @@ INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, tb_fornecedor
 ('Orégano Desidratado', 3.50, 75, 14),
 ('Pizza Congelada', 19.99, 60, 15);
 
--- Inserindo vendas associadas a funcionários
-INSERT INTO tb_vendas (ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) VALUES 
-('2024-02-11 10:30:00', 50.30, 1),
-('2024-02-11 11:00:00', 120.99, 2),
-('2024-02-11 12:15:00', 200.75, 3),
-('2024-02-11 13:30:00', 30.50, 4),
-('2024-02-11 14:45:00', 60.20, 5),
-('2024-02-11 15:10:00', 89.99, 6),
-('2024-02-11 16:25:00', 150.45, 7),
-('2024-02-11 17:40:00', 215.30, 8),
-('2024-02-11 18:55:00', 175.99, 9),
-('2024-02-11 19:05:00', 45.60, 10),
-('2024-02-11 19:20:00', 98.75, 11),
-('2024-02-11 20:00:00', 130.20, 12),
-('2024-02-11 20:30:00', 67.40, 1),
-('2024-02-11 21:10:00', 185.75, 2),
-('2024-02-11 21:45:00', 250.99, 3);
 
--- Inserindo itens vendidos associados a produtos e vendas
-INSERT INTO tb_itens (ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo) VALUES 
-(2, 9.00, 1, 1),
-(1, 7.99, 2, 2),
-(3, 149.70, 3, 3),
-(5, 4.00, 4, 4),
-(2, 13.98, 5, 5),
-(4, 10.00, 6, 6),
-(1, 22.99, 7, 7),
-(6, 35.94, 8, 8),
-(2, 8.40, 9, 9),
-(1, 39.90, 10, 10),
-(3, 16.50, 11, 11),
-(2, 69.80, 12, 12),
-(4, 39.96, 13, 13),
-(3, 10.50, 14, 14),
-(1, 19.99, 15, 15);
