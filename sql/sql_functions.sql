@@ -138,3 +138,18 @@ BEGIN
 END; 
 $$
 LANGUAGE plpgsql ;
+
+
+--REMOVER FUNCIONARIO
+CREATE OR REPLACE PROCEDURE removeruser(
+	IN userid integer,
+	IN username text)
+AS $$
+BEGIN
+    EXECUTE format('DROP USER IF EXISTS %I', userName);
+    EXECUTE format('DELETE FROM tb_funcionarios WHERE fun_codigo = %L', userId);
+
+END;
+$$
+LANGUAGE plpgsql ;;
+
