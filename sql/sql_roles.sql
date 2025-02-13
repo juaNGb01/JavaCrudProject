@@ -22,7 +22,7 @@ ALTER ROLE role_admin WITH CREATEROLE;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE tb_funcionarios TO role_gerente; 
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE tb_fornecedores TO role_gerente;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE tb_vendas TO role_gerente;
-GRANT SELECT ON TABLE tb_produtos TO role_gerente;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE tb_produtos TO role_gerente;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE tb_itens TO role_gerente;
 GRANT USAGE, SELECT, UPDATE ON SEQUENCE tb_vendas_ven_codigo_seq TO role_gerente;
 
