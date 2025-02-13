@@ -32,12 +32,14 @@ CREATE TABLE tb_produtos(
 
 );  
 
-CREATE TABLE tb_itens(
-	ite_codigo BIGSERIAL PRIMARY KEY, 
-	ite_quantidade INTEGER, 
-	ite_valor_parcial DECIMAL(7,2), 
-	tb_produtos_pro_codigo BIGINT, 
-	tb_vendas_ven_codigo BIGINT, 
-	FOREIGN KEY(tb_produtos_pro_codigo)REFERENCES tb_produtos(pro_codigo), 
-	FOREIGN KEY(tb_vendas_ven_codigo) REFERENCES tb_vendas (ven_codigo)
+CREATE TABLE tb_itens (
+    ite_codigo BIGSERIAL PRIMARY KEY, 
+    ite_quantidade INTEGER, 
+    ite_valor_parcial DECIMAL(7,2), 
+    tb_produtos_pro_codigo BIGINT, 
+    tb_vendas_ven_codigo BIGINT, 
+    CONSTRAINT fk_tb_itens_produtos FOREIGN KEY (tb_produtos_pro_codigo) 
+        REFERENCES tb_produtos(pro_codigo) ON DELETE CASCADE, 
+    CONSTRAINT fk_tb_itens_vendas FOREIGN KEY (tb_vendas_ven_codigo) 
+        REFERENCES tb_vendas(ven_codigo) ON DELETE CASCADE
 );
