@@ -1,4 +1,0 @@
-@echo off
-set PGPASSWORD=123456
-"C:\Program Files\PostgreSQL\17\bin\pg_dump.exe" -v -h localhost -U juan -f "C:\Users\juanb\OneDrive\Área de Trabalho\JavaCrudProject-main\JavaCrudProject-main\BackUp\backupProg.sql" trabalhoFinal
-echo Backup concluído!

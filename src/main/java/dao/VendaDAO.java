@@ -51,7 +51,8 @@ public class VendaDAO {
 
         String updateProdutoSQL = "UPDATE tb_produtos SET pro_quantidade = pro_quantidade - ? WHERE pro_codigo = ?";
         String insertVendaSQL = "INSERT INTO tb_vendas (ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) VALUES (NOW(), ?, ?)";
-        String insertItemSQL = "INSERT INTO tb_itens (ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo) VALUES (?, ?, ?, ?)";
+        String insertItemSQL = "INSERT INTO tb_itens (ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo)"
+                + " VALUES (?, ?, ?, ?)";
 
         try{
            
@@ -63,12 +64,17 @@ public class VendaDAO {
             inserirItemVenda(conn, insertItemSQL, vendaId);
             
             conn.commit(); // Commita a transacao
-           //JOptionPane.showMessageDialog(null, "Venda Concluida", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, "Venda Concluida", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Total vendido: " + totalVenda);
             carrinho.clear(); // Limpa o carrinho
 
         } catch (SQLException ex) {
-            // Em caso de exceção, tenta fazer rollback
+            try {
+                // Em caso de exceção, tenta fazer rollback
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             ex.printStackTrace();
         }
     }
